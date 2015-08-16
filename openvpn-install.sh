@@ -7,12 +7,13 @@
 # your Debian/Ubuntu/CentOS box. It has been designed to be as unobtrusive and
 # universal as possible.
 
+ROOT_UID="0"
 
-if [[ "$USER" != 'root' ]]; then
-	echo "Sorry, you need to run this as root"
-	exit
+#Check if run as root
+if [ "$UID" -ne "$ROOT_UID" ] ; then
+	echo "Sorry, you need to run this as root!"
+	exit 1
 fi
-
 
 if [[ ! -e /dev/net/tun ]]; then
 	echo "TUN/TAP is not available"
